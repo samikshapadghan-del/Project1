@@ -1,4 +1,4 @@
-# Wearable Sensor with AI for Fall Prevention 👵🧠
+# Wearable Sensor with AI for Fall Prevention 
 
  Overview
 This project focuses on developing a wearable sensor system integrated with Artificial Intelligence to detect and prevent falls in elderly individuals. The system monitors movement patterns and alerts caregivers in case of abnormal activity.
@@ -40,3 +40,11 @@ Future Improvements
 - GPS tracking
 - Better AI accuracy
 - Cloud data storage
+
+Author
+samiksha padghan
+
+---
+
+ License
+This project is for educational purposes.
