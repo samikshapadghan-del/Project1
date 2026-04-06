@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fall Detection Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>🚑 Fall Detection System</h1>
+
+        <div class="card">
+            <h2>Status</h2>
+            <p id="status" class="safe">SAFE</p>
+        </div>
+
+        <div class="card">
+            <h2>Acceleration</h2>
+            <p>X: <span id="x">0</span></p>
+            <p>Y: <span id="y">0</span></p>
+            <p>Z: <span id="z">0</span></p>
+        </div>
+
+        <div class="card">
+            <h2>Alert</h2>
+            <p id="alert">No alerts</p>
+        </div>
+
+        <button onclick="simulateFall()">Simulate Fall</button>
+        <button onclick="resetStatus()">Reset</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
