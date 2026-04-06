@@ -1,36 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Fall Detection Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FallGuard AI Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🚑 Fall Detection System</h1>
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      <h1>FallGuard AI <span>v1.0</span></h1>
+    </div>
+    <div class="topright">
+      <div class="time-badge" id="clock">--:--:--</div>
+      <div class="status-pill pill-ok" id="status-pill">NORMAL</div>
+    </div>
+  </div>
 
-        <div class="card">
-            <h2>Status</h2>
-            <p id="status" class="safe">SAFE</p>
-        </div>
+  <!-- Stat cards -->
+  <div class="cards">
+    <div class="card c-blue">
+      <div class="lbl">Risk Score</div>
+      <div class="val vblue" id="c-risk">--</div>
+      <div class="sub">out of 100</div>
+      <div class="trend" id="c-risk-trend"></div>
+    </div>
+    <div class="card c-green">
+      <div class="lbl">Acceleration</div>
+      <div class="val vgreen" id="c-accel">--</div>
+      <div class="sub">g-force</div>
+    </div>
+    <div class="card c-purple">
+      <div class="lbl">Gyroscope</div>
+      <div class="val vpurple" id="c-gyro">--</div>
+      <div class="sub">°/s angular</div>
+    </div>
+    <div class="card c-red">
+      <div class="lbl">Falls Today</div>
+      <div class="val vred" id="c-falls">0</div>
+      <div class="sub">detected</div>
+    </div>
+    <div class="card c-amber">
+      <div class="lbl">Uptime</div>
+      <div class="val vamber" id="c-uptime">0s</div>
+      <div class="sub">monitoring</div>
+    </div>
+  </div>
 
-        <div class="card">
-            <h2>Acceleration</h2>
-            <p>X: <span id="x">0</span></p>
-            <p>Y: <span id="y">0</span></p>
-            <p>Z: <span id="z">0</span></p>
-        </div>
+  <!-- Row 2: Line chart + Pie chart -->
+  <div class="grid2">
+    <div class="panel">
+      <h2><span class="dot dot-blue"></span> Live Risk Score</h2>
+      <canvas id="lineChart" height="130"></canvas>
+    </div>
+    <div class="panel">
+      <h2><span class="dot dot-amber"></span> Activity Distribution</h2>
+      <div class="gauge-wrap">
+        <canvas id="pieChart" width="180" height="180"></canvas>
+      </div>
+    </div>
+  </div>
 
-        <div class="card">
-            <h2>Alert</h2>
-            <p id="alert">No alerts</p>
-        </div>
-
-        <button onclick="simulateFall()">Simulate Fall</button>
-        <button onclick="resetStatus()">Reset</button>
+  <!-- Row 3: Body metrics + Alerts + Bar chart -->
+  <div class="grid3">
+    <div class="panel">
+      <h2><span class="dot dot-green"></span> Body Metrics</h2>
+      <div class="bar-row">
+        <div class="bar-label">Balance</div>
+        <div class="bar-track"><div class="bar-fill" id="b-balance" style="background:#4ade80;width:80%"></div></div>
+        <div class="bar-val" id="bv-balance">80%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Gait speed</div>
+        <div class="bar-track"><div class="bar-fill" id="b-gait" style="background:#60a5fa;width:65%"></div></div>
+        <div class="bar-val" id="bv-gait">65%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Posture</div>
+        <div class="bar-track"><div class="bar-fill" id="b-posture" style="background:#a78bfa;width:72%"></div></div>
+        <div class="bar-val" id="bv-posture">72%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Heart rate</div>
+        <div class="bar-track"><div class="bar-fill" id="b-hr" style="background:#fbbf24;width:55%"></div></div>
+        <div class="bar-val" id="bv-hr">72 bpm</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Step score</div>
+        <div class="bar-track"><div class="bar-fill" id="b-step" style="background:#f87171;width:60%"></div></div>
+        <div class="bar-val" id="bv-step">60%</div>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="panel">
+      <h2><span class="dot dot-red"></span> Alerts &amp; Events</h2>
+      <div class="alerts" id="alert-list">
+        <div class="aitem low">
+          <strong>System online</strong>
+          <div class="at">Just now</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot dot-amber"></span> Risk History</h2>
+      <canvas id="barChart" height="148"></canvas>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>Patient: <strong>Elderly User #1</strong> &nbsp;|&nbsp;
+          Sensor: <strong class="green">MPU-6050 Connected</strong></span>
+    <button class="btn-reset" onclick="resetFalls()">Reset Falls Counter</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
